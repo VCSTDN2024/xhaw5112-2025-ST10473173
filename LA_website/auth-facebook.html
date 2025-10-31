@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign in with Facebook - Empowering the Nation</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .facebook-auth {
+      background: #fff;
+      border: 1px solid #dadde1;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .facebook-logo {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 20px;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%231877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>') no-repeat center;
+      background-size: contain;
+    }
+    .facebook-title {
+      color: #1c1e21;
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+    .facebook-subtitle {
+      color: #606770;
+      font-size: 16px;
+      margin: 0 0 24px 0;
+    }
+    .facebook-form {
+      text-align: left;
+    }
+    .facebook-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #dadde1;
+      border-radius: 6px;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+    .facebook-input:focus {
+      outline: none;
+      border-color: #1877f2;
+      box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+    }
+    .facebook-button {
+      background: #1877f2;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    .facebook-button:hover {
+      background: #166fe5;
+    }
+    .facebook-link {
+      color: #1877f2;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .facebook-link:hover {
+      text-decoration: underline;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #606770;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="home.html">
+        <img src="assets/logo.png" alt="Empowering the Nation logo" onerror="this.style.display='none'">
+        <span>Empowering the Nation</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">☰</button>
+        <ul id="nav-menu" class="nav-menu">
+          <li><a href="home.html">Home</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="auth-wrapper">
+    <div class="facebook-auth">
+      <div class="facebook-logo"></div>
+      <h1 class="facebook-title">Log in to Facebook</h1>
+      <p class="facebook-subtitle">Enter your details to continue</p>
+      
+      <form class="facebook-form" onsubmit="event.preventDefault(); handleFacebookSignIn()">
+        <input type="email" class="facebook-input" placeholder="Email address or phone number" required>
+        <input type="password" class="facebook-input" placeholder="Password" required>
+        <button type="submit" class="facebook-button">Log In</button>
+        <div style="text-align: center;">
+          <a href="#" class="facebook-link">Forgotten password?</a>
+        </div>
+      </form>
+      
+      <a href="login.html" class="back-link">← Back to login options</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h4>Empowering the Nation</h4>
+        <p style="margin:8px 0 0 0">&copy; <span id="year"></span> Empowering the Nation</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function handleFacebookSignIn() {
+      const email = document.querySelector('input[type="email"]').value;
+      const password = document.querySelector('input[type="password"]').value;
+      
+      if (email && password) {
+        // Simulate Facebook authentication
+        sessionStorage.setItem('isSignedIn', 'true');
+        sessionStorage.setItem('username', email.split('@')[0]);
+        sessionStorage.setItem('authProvider', 'Facebook');
+        
+        // Check if there's a return URL
+        const returnTo = sessionStorage.getItem('returnTo');
+        window.location.href = returnTo || 'home.html';
+      }
+    }
+    
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>

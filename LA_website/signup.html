@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up - Empowering the Nation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="home.html"><img src="assets/logo.png" alt="Empowering the Nation logo" onerror="this.style.display='none'"> <span>Empowering the Nation</span></a>
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">☰</button>
+        <ul id="nav-menu" class="nav-menu">
+          <li><a href="home.html">Home</a></li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="auth-wrapper">
+    <form class="auth-card" onsubmit="event.preventDefault(); window.location.href='index.html'">
+      <h1 style="text-align:center;margin:0 0 8px 0">Sign up</h1>
+      <p style="text-align:center;color:var(--muted);margin:0 0 16px 0">Create an account to access courses</p>
+      <label>Username</label>
+      <input required placeholder="Username">
+      <label>Email</label>
+      <input type="email" required placeholder="Email">
+      <label>Password</label>
+      <input type="password" required placeholder="Password">
+      <button class="primary" type="submit">Register</button>
+      <p style="text-align:center;color:var(--muted);margin:10px 0 0 0">Have an account? <a href="login.html">Log in</a></p>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h4>Empowering the Nation</h4>
+        <div class="social-links" aria-label="Social links">
+          <a href="http://www.youtube.com/@EmpoweringTheNation" aria-label="YouTube" title="YouTube" target="_blank" rel="noopener noreferrer"><img src="assets/youtube.png" alt="YouTube" width="22" height="22" style="object-fit:contain"></a>
+          <a href="https://www.tiktok.com/@empowering814?is_from_webapp=1&sender_device=pc" aria-label="TikTok" title="TikTok" target="_blank" rel="noopener noreferrer"><img src="assets/tiktok.png" alt="TikTok" width="22" height="22" style="object-fit:contain"></a>
+          <a href="https://www.instagram.com/empoweringthenation/" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><img src="assets/instagram.png" alt="Instagram" width="22" height="22" style="object-fit:contain"></a>
+        </div>
+        <p style="margin:8px 0 0 0">&copy; <span id="year"></span> Empowering the Nation</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="quotes.html">Quotes</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="summary-6week.html">6-week Courses</a></li>
+          <li><a href="summary-6month.html">6-month Courses</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact info</h4>
+        <ul>
+                    <li><a href="tel:0818539901">0818539901</a></li>
+                    <li><a href="mailto:empoweringthenation@outlook.com">empoweringthenation@outlook.com</a></li>
+          <li><span>Sandton City, 83 Rivonia Rd, Sandhurst, Sandton, 2196</span></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="app.js"></script>
+</body>
+</html>
+
+

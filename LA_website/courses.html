@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses - Empowering the Nation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="home.html"><img src="assets/logo.png" alt="Empowering the Nation logo" onerror="this.style.display='none'"> <span>Empowering the Nation</span></a>
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">☰</button>
+        <ul id="nav-menu" class="nav-menu">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="courses.html" aria-current="page">Courses</a></li>
+          <li><a href="quotes.html">Quotes</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <a id="signInLink" href="login.html" style="display:none">Sign in</a>
+      <a href="profile.html" id="profile" class="header-profile" style="display:none">
+        <div class="avatar" id="avatar">U</div>
+        <span class="name" id="profileName"></span>
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="searchbar" style="margin-top:16px">
+      <input id="search" placeholder="Search">
+    </div>
+
+    <h2 style="margin-top:16px">Courses</h2>
+    <div class="cards" id="course-list"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h4>Empowering the Nation</h4>
+        <div class="social-links" aria-label="Social links">
+          <a href="http://www.youtube.com/@EmpoweringTheNation" aria-label="YouTube" title="YouTube" target="_blank" rel="noopener noreferrer"><img src="assets/youtube.png" alt="YouTube" width="22" height="22" style="object-fit:contain"></a>
+          <a href="https://www.tiktok.com/@empowering814?is_from_webapp=1&sender_device=pc" aria-label="TikTok" title="TikTok" target="_blank" rel="noopener noreferrer"><img src="assets/tiktok.png" alt="TikTok" width="22" height="22" style="object-fit:contain"></a>
+          <a href="https://www.instagram.com/empoweringthenation/" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><img src="assets/instagram.png" alt="Instagram" width="22" height="22" style="object-fit:contain"></a>
+        </div>
+        <p style="margin:8px 0 0 0">&copy; <span id="year"></span> Empowering the Nation</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="quotes.html">Quotes</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="summary-6week.html">6-week Courses</a></li>
+          <li><a href="summary-6month.html">6-month Courses</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact info</h4>
+        <ul>
+                    <li><a href="tel:0818539901">0818539901</a></li>
+                    <li><a href="mailto:empoweringthenation@outlook.com">empoweringthenation@outlook.com</a></li>
+          <li><span>Sandton City, 83 Rivonia Rd, Sandhurst, Sandton, 2196</span></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+  <script>
+    const courses = [
+      { id:'first-aid', name:'First Aid', fee:1500, duration:'6 months', image:'assets/first aid.jpeg', href:'detail-first-aid.html' },
+      { id:'sewing', name:'Sewing', fee:1500, duration:'6 months', image:'assets/sewing.jpg', href:'detail-sewing.html' },
+      { id:'landscaping', name:'Landscaping', fee:1500, duration:'6 months', image:'assets/landscaping.jpg', href:'detail-landscaping.html' },
+      { id:'life-skills', name:'Life Skills', fee:1500, duration:'6 months', image:'assets/life skills.jpg', href:'detail-life-skills.html' },
+      { id:'child-minding', name:'Child Minding', fee:750, duration:'6 weeks', image:'assets/child minding.jpg', href:'detail-child-minding.html' },
+      { id:'cooking', name:'Cooking', fee:750, duration:'6 weeks', image:'assets/cooking.jpg', href:'detail-cooking.html' },
+      { id:'garden-maintenance', name:'Garden Maintenance', fee:750, duration:'6 weeks', image:'assets/garden maintence.jpg', href:'detail-garden-maintenance.html' },
+    ];
+    const list = document.getElementById('course-list');
+    function render(filter=''){
+      const q = filter.toLowerCase();
+      list.innerHTML = courses.filter(c=>c.name.toLowerCase().includes(q)).map(c => `
+        <article class="card">
+          <a href="${c.href}" aria-label="Open ${c.name}">
+            <img src="${c.image}" alt="${c.name}" style="width:100%;height:160px;object-fit:cover;border-radius:10px">
+          </a>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <h3 style="margin:6px 0">${c.name}</h3>
+            <span class="tag">${c.duration}</span>
+          </div>
+          <p style="margin:0;color:var(--muted)">Fee: R${c.fee}</p>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <a class="btn" href="${c.href}">View</a>
+            <a class="btn" href="quotes.html?add=${c.id}">Get Quote</a>
+          </div>
+        </article>
+      `).join('');
+    }
+    render();
+    document.getElementById('search').addEventListener('input', e=>render(e.target.value));
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
+
+

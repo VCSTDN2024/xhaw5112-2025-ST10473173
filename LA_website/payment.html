@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment - Empowering the Nation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="home.html"><img src="assets/logo.png" alt="Empowering the Nation logo" onerror="this.style.display='none'"> <span>Empowering the Nation</span></a>
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">☰</button>
+        <ul id="nav-menu" class="nav-menu">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="quotes.html">Quotes</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <a id="signInLink" href="login.html" style="display:none">Sign in</a>
+      <a href="profile.html" id="profile" class="header-profile" style="display:none">
+        <div class="avatar" id="avatar">U</div>
+        <span class="name" id="profileName"></span>
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="cards" style="grid-template-columns:1fr 1fr;margin-top:16px">
+      <section class="card">
+        <h2 style="margin:0 0 8px 0">Order Summary</h2>
+        <table>
+          <tbody>
+            <tr><th>Items</th><td id="items">--</td></tr>
+            <tr><th>Subtotal</th><td id="subtotal">R0</td></tr>
+            <tr><th>Discount</th><td id="discount">0%</td></tr>
+            <tr><th>Shipping</th><td>R0.00</td></tr>
+            <tr><th>Total</th><td id="total">R0</td></tr>
+          </tbody>
+        </table>
+        <div id="lineItems" style="margin-top:8px;color:var(--muted)"></div>
+      </section>
+      <section class="card">
+        <h2 style="margin:0 0 8px 0">Payment</h2>
+        <form id="payform">
+          <div style="display:flex;gap:10px;margin-bottom:10px">
+            <label><input type="radio" name="pm" value="card" checked> Credit/Debit Card</label>
+            <label><input type="radio" name="pm" value="paypal"> PayPal</label>
+          </div>
+          <label>Cardholder Name</label>
+          <input required placeholder="Full Name">
+          <label>Card Number</label>
+          <input required placeholder="012 345 6789" maxlength="10">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div>
+              <label>Expiry (MM/YY)</label>
+              <input id="expiryInput" required placeholder="MM/YY" maxlength="5">
+            </div>
+            <div>
+              <label>CVV</label>
+              <input required placeholder="123" maxlength="4">
+            </div>
+          </div>
+          <label><input type="checkbox" required> I agree to Terms and Conditions</label>
+          <button class="primary" type="submit">Pay</button>
+          <button type="button" onclick="navigateBack()">Cancel</button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h4>Empowering the Nation</h4>
+        <div class="social-links" aria-label="Social links">
+          <a href="http://www.youtube.com/@EmpoweringTheNation" aria-label="YouTube" title="YouTube" target="_blank" rel="noopener noreferrer"><img src="assets/youtube.png" alt="YouTube" width="22" height="22" style="object-fit:contain"></a>
+          <a href="https://www.tiktok.com/@empowering814?is_from_webapp=1&sender_device=pc" aria-label="TikTok" title="TikTok" target="_blank" rel="noopener noreferrer"><img src="assets/tiktok.png" alt="TikTok" width="22" height="22" style="object-fit:contain"></a>
+          <a href="https://www.instagram.com/empoweringthenation/" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><img src="assets/instagram.png" alt="Instagram" width="22" height="22" style="object-fit:contain"></a>
+        </div>
+        <p style="margin:8px 0 0 0">&copy; <span id="year"></span> Empowering the Nation</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="quotes.html">Quotes</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact info</h4>
+        <ul>
+                    <li><a href="tel:0818539901">0818539901</a></li>
+                    <li><a href="mailto:empoweringthenation@outlook.com">empoweringthenation@outlook.com</a></li>
+          <li><span>Sandton City, 83 Rivonia Rd, Sandhurst, Sandton, 2196</span></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="summary-6week.html">6-week Courses</a></li>
+          <li><a href="summary-6month.html">6-month Courses</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Load quote data from localStorage
+    const raw = localStorage.getItem('quoteData');
+    if (raw){
+      try {
+        const q = JSON.parse(raw);
+        document.getElementById('items').textContent = `${q.items?.length||0} course(s)`;
+        document.getElementById('subtotal').textContent = `R${(q.subtotal||0).toFixed(2)}`;
+        document.getElementById('discount').textContent = `${((q.discountPercent||0)*100).toFixed(0)}%`;
+        document.getElementById('total').textContent = `R${(q.total||0).toFixed(2)}`;
+        const lines = (q.items||[]).map(it => `${it.name}: R${(it.price||0).toFixed(2)}`).join('<br>');
+        document.getElementById('lineItems').innerHTML = lines;
+      } catch (e) {
+        console.error('Failed to parse quoteData', e);
+      }
+    }
+    
+    // Expiry date formatting - auto-add / after first 2 digits
+    const expiryInput = document.getElementById('expiryInput');
+    if (expiryInput) {
+      expiryInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+        if (value.length >= 2) {
+          value = value.substring(0, 2) + '/' + value.substring(2, 4);
+        }
+        e.target.value = value;
+      });
+    }
+    
+    // Payment submit handling: require sign-in
+    const payForm = document.getElementById('payform');
+    if (payForm){
+      payForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        
+        // Check if user is signed in
+        if (!sessionStorage.getItem('isSignedIn')){
+          // Store payment form data before redirecting
+          const formData = {
+            cardholderName: document.querySelector('input[placeholder="Full Name"]').value,
+            cardNumber: document.querySelector('input[placeholder="012 345 6789"]').value,
+            expiry: document.getElementById('expiryInput').value,
+            cvv: document.querySelector('input[placeholder="123"]').value,
+            paymentMethod: document.querySelector('input[type="radio"][name="pm"]:checked').value
+          };
+          sessionStorage.setItem('paymentFormData', JSON.stringify(formData));
+          sessionStorage.setItem('returnTo', 'payment.html');
+          alert('Please sign in to continue with your payment.');
+          window.location.href = 'login.html';
+          return;
+        }
+        
+        // If signed in, proceed to success page
+        window.location.href = 'success.html';
+      });
+    }
+    
+    // On page load, restore payment form data if returning from login
+    window.addEventListener('load', function() {
+      const paymentFormData = sessionStorage.getItem('paymentFormData');
+      const returnTo = sessionStorage.getItem('returnTo');
+      
+      if (paymentFormData && returnTo === 'payment.html') {
+        try {
+          const formData = JSON.parse(paymentFormData);
+          
+          // Restore form fields
+          const nameInput = document.querySelector('input[placeholder="Full Name"]');
+          const cardInput = document.querySelector('input[placeholder="012 345 6789"]');
+          const expiryInput = document.getElementById('expiryInput');
+          const cvvInput = document.querySelector('input[placeholder="123"]');
+          const paymentRadios = document.querySelectorAll('input[name="pm"]');
+          
+          if (nameInput && formData.cardholderName) nameInput.value = formData.cardholderName;
+          if (cardInput && formData.cardNumber) cardInput.value = formData.cardNumber;
+          if (expiryInput && formData.expiry) expiryInput.value = formData.expiry;
+          if (cvvInput && formData.cvv) cvvInput.value = formData.cvv;
+          
+          // Restore payment method
+          if (paymentRadios && formData.paymentMethod) {
+            paymentRadios.forEach(radio => {
+              if (radio.value === formData.paymentMethod) {
+                radio.checked = true;
+              }
+            });
+          }
+          
+          // Clear the stored data after restoring
+          sessionStorage.removeItem('paymentFormData');
+          sessionStorage.removeItem('returnTo');
+        } catch (e) {
+          console.error('Failed to restore payment form data', e);
+        }
+      }
+    });
+  </script>
+  <script src="app.js"></script>
+  <script>
+    try { initHeaderProfile(); } catch (e) {}
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
+

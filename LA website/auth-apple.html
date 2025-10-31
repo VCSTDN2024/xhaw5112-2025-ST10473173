@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign in with Apple - Empowering the Nation</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .apple-auth {
+      background: #fff;
+      border: 1px solid #d2d2d7;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .apple-logo {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 20px;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23000000" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91 1.54.16 2.64.92 3.34 2.19-1.35.78-2.17 1.9-2.17 3.22 0 1.2.65 2.2 1.7 2.8-.65.19-1.35.3-2.07.3-.72 0-1.42-.11-2.07-.3z"/><path fill="%23000000" d="M13.75 3.5c.03-1.3.5-2.5 1.3-3.4.8-.9 1.9-1.4 3.1-1.4 1.2 0 2.3.5 3.1 1.4.8.9 1.27 2.1 1.3 3.4.03 1.3-.5 2.5-1.3 3.4-.8.9-1.9 1.4-3.1 1.4-1.2 0-2.3-.5-3.1-1.4-.8-.9-1.27-2.1-1.3-3.4z"/></svg>') no-repeat center;
+      background-size: contain;
+    }
+    .apple-title {
+      color: #1d1d1f;
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+    }
+    .apple-subtitle {
+      color: #86868b;
+      font-size: 16px;
+      margin: 0 0 24px 0;
+    }
+    .apple-form {
+      text-align: left;
+    }
+    .apple-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #d2d2d7;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+    .apple-input:focus {
+      outline: none;
+      border-color: #007aff;
+      box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+    }
+    .apple-button {
+      background: #000;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    .apple-button:hover {
+      background: #1a1a1a;
+    }
+    .apple-link {
+      color: #007aff;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .apple-link:hover {
+      text-decoration: underline;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #86868b;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="home.html">
+        <img src="assets/logo.png" alt="Empowering the Nation logo" onerror="this.style.display='none'">
+        <span>Empowering the Nation</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">☰</button>
+        <ul id="nav-menu" class="nav-menu">
+          <li><a href="home.html">Home</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="auth-wrapper">
+    <div class="apple-auth">
+      <div class="apple-logo"></div>
+      <h1 class="apple-title">Sign in with Apple</h1>
+      <p class="apple-subtitle">Use your Apple ID to continue</p>
+      
+      <form class="apple-form" onsubmit="event.preventDefault(); handleAppleSignIn()">
+        <input type="email" class="apple-input" placeholder="Apple ID" required>
+        <input type="password" class="apple-input" placeholder="Password" required>
+        <button type="submit" class="apple-button">Sign In</button>
+        <div style="text-align: center;">
+          <a href="#" class="apple-link">Forgot Apple ID or password?</a>
+        </div>
+      </form>
+      
+      <a href="login.html" class="back-link">← Back to login options</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h4>Empowering the Nation</h4>
+        <p style="margin:8px 0 0 0">&copy; <span id="year"></span> Empowering the Nation</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function handleAppleSignIn() {
+      const email = document.querySelector('input[type="email"]').value;
+      const password = document.querySelector('input[type="password"]').value;
+      
+      if (email && password) {
+        // Simulate Apple authentication
+        sessionStorage.setItem('isSignedIn', 'true');
+        sessionStorage.setItem('username', email.split('@')[0]);
+        sessionStorage.setItem('authProvider', 'Apple');
+        
+        // Check if there's a return URL
+        const returnTo = sessionStorage.getItem('returnTo');
+        window.location.href = returnTo || 'home.html';
+      }
+    }
+    
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>

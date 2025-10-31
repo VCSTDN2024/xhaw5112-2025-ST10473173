@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log in - Empowering the Nation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="home.html"><img src="assets/logo.png" alt="Empowering the Nation logo" onerror="this.style.display='none'"> <span>Empowering the Nation</span></a>
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu">☰</button>
+        <ul id="nav-menu" class="nav-menu">
+          <li><a href="home.html">Home</a></li>
+          
+        </ul>
+      </nav>
+      <a id="signInLink" href="login.html" style="display:none">Sign in</a>
+      <a href="profile.html" id="profile" class="header-profile" style="display:none">
+        <div class="avatar" id="avatar">U</div>
+        <span class="name" id="profileName"></span>
+      </a>
+    </div>
+  </header>
+
+  <main class="auth-wrapper">
+    <form class="auth-card" onsubmit="event.preventDefault(); sessionStorage.setItem('isSignedIn','true'); sessionStorage.setItem('username', this.querySelector('input[placeholder=\'Username\']').value.trim()||'User'); const returnTo = sessionStorage.getItem('returnTo'); if(returnTo) { window.location.href = returnTo; } else { window.location.href='home.html'; }">
+      <h1 style="text-align:center;margin:0 0 8px 0">Welcome back!</h1>
+      <p style="text-align:center;color:var(--muted);margin:0 0 16px 0">Please sign in to continue</p>
+      <label>Username</label>
+      <input required placeholder="Username">
+      <label>Password</label>
+      <input type="password" required placeholder="Password">
+      <button class="primary" type="submit">Sign in</button>
+      <div class="or" style="margin:10px 0">OR</div>
+      <a href="auth-google.html" class="social-login-btn google">
+        <svg class="icon" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        Sign in with Google
+      </a>
+      <a href="auth-facebook.html" class="social-login-btn facebook">
+        <svg class="icon" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        Sign in with Facebook
+      </a>
+      <a href="auth-apple.html" class="social-login-btn apple">
+        <svg class="icon" viewBox="0 0 814 1000">
+          <path fill="currentColor" d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-157.4 123.1-69.8 0-91.1-44.1-173.3-44.1-82.2 0-103.5 44.1-173.3 44.1-69.8 0-114.6-61.5-157.4-123.1-46.1-70.1-68.1-138.7-68.7-141.9 3.9-1.3 134.2-53.8 134.2-202.2 0-128.3-102.4-186-108.2-190.5-5.8-4.5-49.3-60.1-49.3-95.9 0-35.8 19.2-67.1 43.1-90.1 23.9-23 55.2-35.8 90.1-35.8 35.8 0 67.1 12.8 90.1 35.8 23 23 43.1 54.3 43.1 90.1 0 35.8-43.5 91.4-49.3 95.9z"/>
+        </svg>
+        Sign in with Apple
+      </a>
+      <p style="text-align:center;color:var(--muted);margin:10px 0 0 0">Don’t have an account? <a href="signup.html">Sign up</a></p>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h4>Empowering the Nation</h4>
+        <div class="social-links" aria-label="Social links">
+          <a href="http://www.youtube.com/@EmpoweringTheNation" aria-label="YouTube" title="YouTube" target="_blank" rel="noopener noreferrer"><img src="assets/youtube.png" alt="YouTube" width="22" height="22" style="object-fit:contain"></a>
+          <a href="https://www.tiktok.com/@empowering814?is_from_webapp=1&sender_device=pc" aria-label="TikTok" title="TikTok" target="_blank" rel="noopener noreferrer"><img src="assets/tiktok.png" alt="TikTok" width="22" height="22" style="object-fit:contain"></a>
+          <a href="https://www.instagram.com/empoweringthenation/" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><img src="assets/instagram.png" alt="Instagram" width="22" height="22" style="object-fit:contain"></a>
+        </div>
+        <p style="margin:8px 0 0 0">&copy; <span id="year"></span> Empowering the Nation</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="quotes.html">Quotes</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="summary-6week.html">6-week Courses</a></li>
+          <li><a href="summary-6month.html">6-month Courses</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact info</h4>
+        <ul>
+                    <li><a href="tel:0818539901">0818539901</a></li>
+                    <li><a href="mailto:empoweringthenation@outlook.com">empoweringthenation@outlook.com</a></li>
+          <li><span>Sandton City, 83 Rivonia Rd, Sandhurst, Sandton, 2196</span></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="app.js"></script>
+  <script>try { initHeaderProfile(); } catch (e) {}</script>
+</body>
+</html>
+
+
